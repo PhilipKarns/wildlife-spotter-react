@@ -1,0 +1,40 @@
+{
+  "name": "wildlife-spotter-mern",
+  "version": "1.0.0",
+  "description": "A full-stack MERN application which uses geolocation to get a users location, and the user can upload pics of their wildlife spottings for others to see.",
+  "main": "public/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack & node server",
+    "start": "node server",
+    "build": "webpack"
+  },
+  "author": "Ahmed Haque",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.12.0",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.10.6",
+    "morgan": "^1.8.2",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "request": "^2.72.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.3.13",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "json-loader": "^0.5.4",
+    "webpack": "^1.13.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pakmania10/wildlife-spotter-react.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pakmania10/wildlife-spotter-react/issues"
+  },
+  "homepage": "https://github.com/pakmania10/wildlife-spotter-react#readme"
+}
