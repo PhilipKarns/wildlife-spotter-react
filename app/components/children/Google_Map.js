@@ -13,26 +13,32 @@ export default class GoogleMap extends Component {
 		}
 	}	
 	componentDidMount() {
-		const latitude = this.state.currentLocation.lat;
-		const longitude = this.state.currentLocation.lng;
-		
+
+      //get the user's current location and update the state with the lat/lng
+      navigator.geolocation.getCurrentPosition((position) => {
+         const pos = position.coords;
+          this.setState({
+          	currentLocation: {
+          		lat: pos.latitude,
+          		lng: pos.longitude
+          	}
+          });
+		//save the latitude and longitude of the state in variables       
+		const myLatitude = this.state.currentLocation.lat;
+		const myLongitude = this.state.currentLocation.lng;
+		console.log(myLatitude);
+		console.log(myLongitude);
+		console.log(this.state.currentLocation);
+		//create the map with the current state of latitude and longitude
 		this.map = new google.maps.Map(this.refs.map, {
-			center: {lat: latitude, lng: longitude},
+			center: {lat: myLatitude, lng: myLongitude},
 			zoom: 12
-		});
-		        //HTML5 geolocation.
-	          navigator.geolocation.getCurrentPosition((position) => {
-	             const pos = position.coords;
-	              this.setState({
-	              	currentLocation: {
-	              		lat: pos.latitude,
-	              		lng: pos.longitude
-	              	}
-	              })
-	            	          	console.log(position);
-	          	console.log(position.coords.latitude);
-			  	console.log(pos.latitude + pos.longitude);
-			  });
+		});	              
+
+       	console.log(position);
+      	console.log(position.coords.latitude);
+	  	console.log(pos.latitude, pos.longitude);
+	  });
 	
 	}
 
