@@ -34,10 +34,14 @@ export default class GoogleMap extends Component {
 			center: {lat: myLatitude, lng: myLongitude},
 			zoom: 12
 		});	              
+		const map = this.map;
 
-       	console.log(position);
-      	console.log(position.coords.latitude);
-	  	console.log(pos.latitude, pos.longitude);
+		this.marker = new google.maps.Marker({
+          // The below line is equivalent to writing:
+          // position: new google.maps.LatLng(-34.397, 150.644)
+          position: {lat: myLatitude, lng: myLongitude},
+          map: map
+        });
 	  });
 	
 	}
