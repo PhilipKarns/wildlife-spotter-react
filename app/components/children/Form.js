@@ -32,8 +32,19 @@ export default class Form extends Component {
     EXIF.getData(file, function() {
       //console.log(EXIF.pretty(file));
       console.log(EXIF.getTag(this, "GPSLatitude"));
-      console.log(EXIF.getTag(this, "GPSLatitude"));
+      console.log(EXIF.getTag(this, "GPSLongitude"));
+      console.log(EXIF.getTag(this, "GPSLongitudeRef"));
+      //get the data and convert it to decimals, which can be sent to Google Maps
+      var lat = EXIF.getTag(this, "GPSLatitude");
+      var lng = EXIF.getTag(this, "GPSLongitude");
+      var latRef = EXIF.getTag(this, "GPSLatitudeRef");
+      var lngRef = EXIF.getTag(this, "GPSLongitudeRef");
+      lat = (lat[0] + lat[1]/60 + lat[2]/3600) * (latRef == "N" ? 1 : -1);  
+      lng = (lng[0] + lng[1]/60 + lng[2]/3600) * (lngRef == "W" ? -1 : 1);
+      console.log(lat, lng);      
+
     });
+
     //this calls the reader.onloadend function
     reader.readAsDataURL(file);
     //reader.readAsBinaryString(file);
@@ -51,7 +62,7 @@ export default class Form extends Component {
     var imagePreviewURL = this.state.imagePreviewURL;
     var $imagePreview = null;
     if(imagePreviewURL) {
-      $imagePreview = (<img src={imagePreviewURL} />);
+      $imagePreview = (<img src={imagePreviewURL} height="25%" width="25%" />);
     }
     else {
       $imagePreview = (<div className="previewText">Please select an image for preview</div>);

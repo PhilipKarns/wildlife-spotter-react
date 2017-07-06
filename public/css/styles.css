@@ -5,10 +5,14 @@ html, body {
 }
 
 #map {
-	height: 50%;
+	height: 90%;
 }
 
 img {
 	display: block;
 	margin: 0 auto;
+}
+
+input[type=file]{ 
+    color:transparent;
 }
