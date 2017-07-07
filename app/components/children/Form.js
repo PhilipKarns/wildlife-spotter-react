@@ -8,7 +8,8 @@ export default class Form extends Component {
     this.state = { 
       image: "", 
       imagePreviewURL: "", 
-      imageCoords: "" 
+      imageLatitude: 0,
+      imageLongitude: 0 
     };
     this.handleFileChange = this.handleFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);    
@@ -22,33 +23,46 @@ export default class Form extends Component {
     console.log(file);
 
     reader.onloadend = function() {
-     
+     var lat;
+     var lng;
+     //the "this" in this.setState would typically look to the onloadend method
+     //but we want to update the state of the Form class, so we have to put .bind
+     //at the end of the onloadend method at line 54, which will bypass this method
+     //and look up a level to the form
       this.setState({
         image: file,
         imagePreviewURL: reader.result
       });
-    }.bind(this)
-    //this gets the metadata from the image
-    EXIF.getData(file, function() {
-      //console.log(EXIF.pretty(file));
-      console.log(EXIF.getTag(this, "GPSLatitude"));
-      console.log(EXIF.getTag(this, "GPSLongitude"));
-      console.log(EXIF.getTag(this, "GPSLongitudeRef"));
-      //get the data and convert it to decimals, which can be sent to Google Maps
-      var lat = EXIF.getTag(this, "GPSLatitude");
-      var lng = EXIF.getTag(this, "GPSLongitude");
-      var latRef = EXIF.getTag(this, "GPSLatitudeRef");
-      var lngRef = EXIF.getTag(this, "GPSLongitudeRef");
-      lat = (lat[0] + lat[1]/60 + lat[2]/3600) * (latRef == "N" ? 1 : -1);  
-      lng = (lng[0] + lng[1]/60 + lng[2]/3600) * (lngRef == "W" ? -1 : 1);
-      console.log(lat, lng);      
+      
+      //this.props.setImage(reader.result);
 
-    });
+      //this gets the metadata from the image
+      EXIF.getData(file, function() {
+        //console.log(EXIF.pretty(file));
+        // console.log(EXIF.getTag(file, "GPSLatitude"));
+        // console.log(EXIF.getTag(file, "GPSLongitude"));
+        // console.log(EXIF.getTag(file, "GPSLongitudeRef"));
+        //get the data and convert it to decimals, which can be sent to Google Maps
+        lat = EXIF.getTag(file, "GPSLatitude");
+        lng = EXIF.getTag(file, "GPSLongitude");
+        var latRef = EXIF.getTag(file, "GPSLatitudeRef");
+        var lngRef = EXIF.getTag(file, "GPSLongitudeRef");
+        lat = (lat[0] + lat[1]/60 + lat[2]/3600) * (latRef == "N" ? 1 : -1);  
+        lng = (lng[0] + lng[1]/60 + lng[2]/3600) * (lngRef == "W" ? -1 : 1);
+        //console.log(lat, lng);
+        this.setState({imageLatitude: lat});
+        this.setState({imageLongitude: lng});
+      //in order to get this.setState to look update the state of the Form class
+      //we have to put .bind at the end of the EXIF function on line 26. "this"
+      //then look up a level to the onloadend function that it's nested in.
+      //because onloadend also has a .bind on line 59, "this" then looks up 
+      //another level to the Form and can update the state.  
+      }.bind(this));     
+    }.bind(this);
 
     //this calls the reader.onloadend function
     reader.readAsDataURL(file);
-    //reader.readAsBinaryString(file);
-    console.log(reader);
+    //console.log(reader);
   }
 
   handleSubmit(event) {
@@ -56,6 +70,10 @@ export default class Form extends Component {
       this.setState({ image: "" });
       this.props.setImage(this.state.imagePreviewURL);
       this.setState({ imagePreviewURL: "" });
+      this.props.setLatitude(this.state.imageLatitude);
+      this.setState({ imageLatitude: 0 });
+      this.props.setLongitude(this.state.imageLongitude);
+      this.setState({ imageLongitude: 0 });      
   }
 
   render() {

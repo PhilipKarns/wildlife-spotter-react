@@ -8,13 +8,27 @@ export default class Main extends Component {
   	super(props);
     this.state = { 
     	imagePreviewURL: "", 
-    	imageCoords: "" 
+    	imageLatitude: 0,
+    	imageLongitude: 0
     };
+    this.setImage = this.setImage.bind(this);
+    this.setLatitude = this.setLatitude.bind(this);
+    this.setLongitude = this.setLongitude.bind(this);
   }
 
-  setImage(imageURL) {
+  	setImage(imageURL) {
 		this.setState({
 			imagePreviewURL: imageURL
+		});
+	}
+	setLatitude(latitude) {
+		this.setState({
+			imageLatitude: latitude
+		});
+	}
+	setLongitude(longitude) {
+		this.setState({
+			imageLongitude: longitude
 		});
 	}
 	render() {
@@ -26,11 +40,11 @@ export default class Main extends Component {
 						<p className="text-center">You Spot Wildlife. You Share Geotagged Images. Others Spot the Wildlife.</p> 
 					</div>
 					<div className="col-md-12" id="google-map" style={{height: "50%"}}>
-						<GoogleMap />
+						<GoogleMap lat={this.state.imageLatitude} lng={this.state.imageLongitude} image={this.state.imagePreviewURL}/>
 					</div>
 					<div className="col-md-12">
 						{/*This will be the code we pass to the form Component*/}						
-						<Form setImage={this.setImage} setCoords={this.setCoords} />
+						<Form setImage={this.setImage} setLatitude={this.setLatitude} setLongitude={this.setLongitude} />
 					</div>
 				</div>
 			</div>
