@@ -9,11 +9,13 @@ export default class Main extends Component {
     this.state = { 
     	imagePreviewURL: "", 
     	imageLatitude: 0,
-    	imageLongitude: 0
+    	imageLongitude: 0,
+    	imageDate: null
     };
     this.setImage = this.setImage.bind(this);
     this.setLatitude = this.setLatitude.bind(this);
     this.setLongitude = this.setLongitude.bind(this);
+    this.setDate = this.setDate.bind(this);
   }
 
   	setImage(imageURL) {
@@ -31,6 +33,14 @@ export default class Main extends Component {
 			imageLongitude: longitude
 		});
 	}
+	setDate(date) {
+		this.setState({
+			imageDate: date
+		});
+	}
+	componentDidUpdate(prevProps, prevState) {
+		console.log("component updated");
+	}
 	render() {
 		return(
 			<div className="container" style={{height: "100%"}}>
@@ -44,7 +54,8 @@ export default class Main extends Component {
 					</div>
 					<div className="col-md-12">
 						{/*This will be the code we pass to the form Component*/}						
-						<Form setImage={this.setImage} setLatitude={this.setLatitude} setLongitude={this.setLongitude} />
+						<Form setImage={this.setImage} setLatitude={this.setLatitude} setLongitude={this.setLongitude}
+						setDate={this.setDate}/>
 					</div>
 				</div>
 			</div>

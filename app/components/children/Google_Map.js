@@ -8,7 +8,7 @@ export default class GoogleMap extends Component {
 		this.state = {
 			currentLocation: {
 			lat: 0,
-			lng: 0
+			lng: 0,
 			}
 		}
 	}	

@@ -9,7 +9,8 @@ export default class Form extends Component {
       image: "", 
       imagePreviewURL: "", 
       imageLatitude: 0,
-      imageLongitude: 0 
+      imageLongitude: 0,
+      imageDate: null 
     };
     this.handleFileChange = this.handleFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);    
@@ -45,6 +46,7 @@ export default class Form extends Component {
         //get the data and convert it to decimals, which can be sent to Google Maps
         lat = EXIF.getTag(file, "GPSLatitude");
         lng = EXIF.getTag(file, "GPSLongitude");
+        var date = EXIF.getTag(file, "DateTime");
         var latRef = EXIF.getTag(file, "GPSLatitudeRef");
         var lngRef = EXIF.getTag(file, "GPSLongitudeRef");
         lat = (lat[0] + lat[1]/60 + lat[2]/3600) * (latRef == "N" ? 1 : -1);  
@@ -52,6 +54,7 @@ export default class Form extends Component {
         //console.log(lat, lng);
         this.setState({imageLatitude: lat});
         this.setState({imageLongitude: lng});
+        this.setState({imageDate: date});
       //in order to get this.setState to look update the state of the Form class
       //we have to put .bind at the end of the EXIF function on line 26. "this"
       //then look up a level to the onloadend function that it's nested in.
@@ -73,7 +76,9 @@ export default class Form extends Component {
       this.props.setLatitude(this.state.imageLatitude);
       this.setState({ imageLatitude: 0 });
       this.props.setLongitude(this.state.imageLongitude);
-      this.setState({ imageLongitude: 0 });      
+      this.setState({ imageLongitude: 0 });
+      this.props.setDate(this.state.imageDate);
+      this.setState({ imageDate: null });      
   }
 
   render() {
@@ -91,7 +96,7 @@ export default class Form extends Component {
           <h3 className="panel-title text-center">Image Upload</h3>
         </div>
         <div className="panel-body text-center">
-        	<form onSubmit={this.handleSubmit}>
+        	<form onSubmit={this.handleSubmit} method="post" enctype="multipart/form-data">
             <div className="form-group">
               <h4 className="">
                 <strong>Image</strong>
