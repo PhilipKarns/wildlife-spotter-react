@@ -8,7 +8,7 @@ var multer = require("multer");
 
 
 //require Image model
-//var Image = require("./models/Image");
+var Image = require("./models/Image");
 
 // Create a new express app
 var app = express();

@@ -96,7 +96,7 @@ export default class Form extends Component {
           <h3 className="panel-title text-center">Image Upload</h3>
         </div>
         <div className="panel-body text-center">
-        	<form onSubmit={this.handleSubmit} method="post" enctype="multipart/form-data">
+        	<form onSubmit={this.handleSubmit} method="post" encType="multipart/form-data">
             <div className="form-group">
               <h4 className="">
                 <strong>Image</strong>
