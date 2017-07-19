@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import GoogleMap from "./children/Google_Map";
 import Form from "./children/Form";
 
+var helpers = require("./utils/helpers");
+
 export default class Main extends Component {
   constructor(props) {
   	super(props);
@@ -40,6 +42,10 @@ export default class Main extends Component {
 	}
 	componentDidUpdate(prevProps, prevState) {
 		console.log("component updated");
+		var coords = [this.state.imageLongitude, this.state.imageLatitude];
+		helpers.postHistory("www.google.com", this.state.imageDate, coords).then(function() {
+			console.log("info sent to server to update DB");	
+		}.bind(this));
 	}
 	render() {
 		return(

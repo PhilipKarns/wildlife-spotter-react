@@ -5,11 +5,6 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var multer = require("multer");
 
-
-
-//require Image model
-var Image = require("./models/Image");
-
 // Create a new express app
 var app = express();
 // Sets an initial port. We’ll use this later in our listener
@@ -41,6 +36,8 @@ db.once("open", function() {
 require("./routes/html-routes.js")(app);
 //require multer file
 require("./routes/animalImage.js")(app);
+require("./routes/api-routes.js")(app);
+
 //app.use("/multer", multerImage);
 //var routes = require("./routes/multer");
 
