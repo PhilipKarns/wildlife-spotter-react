@@ -11,7 +11,9 @@ module.exports = function(app) {
 	  Image.create({
 	  	imageURL: req.body.imageURL,
 	  	date: req.body.date, 
-	  	geometry: req.body.geometry
+	  	geometry: {
+	  		coordinates: req.body.geometry
+	  	},
 	  }, function(err) {
 	  	if (err) {
 	  		console.log(err);
