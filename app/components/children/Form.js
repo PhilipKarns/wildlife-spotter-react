@@ -51,7 +51,7 @@ export default class Form extends Component {
         var lngRef = EXIF.getTag(file, "GPSLongitudeRef");
         lat = (lat[0] + lat[1]/60 + lat[2]/3600) * (latRef == "N" ? 1 : -1);  
         lng = (lng[0] + lng[1]/60 + lng[2]/3600) * (lngRef == "W" ? -1 : 1);
-        //console.log(lat, lng);
+        console.log(lat, lng);
         this.setState({imageLatitude: lat});
         this.setState({imageLongitude: lng});
         this.setState({imageDate: date});

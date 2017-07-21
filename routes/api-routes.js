@@ -8,6 +8,7 @@ module.exports = function(app) {
 	  console.log("Geometry: " + req.body.geometry);
 	  console.log("Body: " + req.body);
 
+	  //Create a new document in the collection each time an image is posted
 	  Image.create({
 	  	imageURL: req.body.imageURL,
 	  	date: req.body.date, 
@@ -24,4 +25,16 @@ module.exports = function(app) {
 	  	}
 	  });
 	})
+
+	app.get("/api", function(req, res) {
+		Image.find({}).exec(function(err, doc) {
+			if(err) {
+				console.log(err);
+			}
+			else {
+				//console.log(doc);
+				res.send(doc);
+			}
+		});
+	});
 };

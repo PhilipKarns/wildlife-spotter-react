@@ -9,6 +9,9 @@ var helper = {
 			geometry: geometry
 		});
 		console.log("info saved to database");
+	},
+	getHistory: function() {
+		return axios.get("/api");
 	}
 };
 

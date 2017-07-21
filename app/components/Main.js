@@ -12,7 +12,8 @@ export default class Main extends Component {
     	imagePreviewURL: "", 
     	imageLatitude: 0,
     	imageLongitude: 0,
-    	imageDate: null
+    	imageDate: null,
+    	imageHistory: []
     };
     this.setImage = this.setImage.bind(this);
     this.setLatitude = this.setLatitude.bind(this);
@@ -41,12 +42,29 @@ export default class Main extends Component {
 		});
 	}
 	componentDidUpdate(prevProps, prevState) {
-		console.log("component updated");
+		//console.log("component updated");
 		var coords = [this.state.imageLongitude, this.state.imageLatitude];
-		helpers.postHistory("www.google.com", this.state.imageDate, coords).then(function() {
-			console.log("info sent to server to update DB");	
-		}.bind(this));
+		console.log(coords);
+		if(this.state.imageHistory === prevState.imageHistory) {
+			helpers.postHistory("www.google.com", this.state.imageDate, coords).then(function() {
+				console.log("info sent to server to update DB");
+				helpers.getHistory().then(function(response) {
+					//THIS GIVES US A RESPONSE AND ALLOWS US TO UPDATE THE STATE OF IMAGEHISTORY WITH THE FIRST OBJECT IN THE ARRAY
+					console.log("Response: " + response.data);
+						this.setState({ imageHistory: response.data });
+				}.bind(this));	
+			}.bind(this));
+		}
 	}
+	componentDidMount() {
+		helpers.getHistory().then(function(response) {
+			console.log(response);
+			if(response.data !== this.state.imageHistory) {
+				console.log("History", response.data);
+				this.setState({ imageHistory: response.data });
+			}	
+		}.bind(this));
+	}	
 	render() {
 		return(
 			<div className="container" style={{height: "100%"}}>
@@ -56,7 +74,8 @@ export default class Main extends Component {
 						<p className="text-center">You Spot Wildlife. You Share Geotagged Images. Others Spot the Wildlife.</p> 
 					</div>
 					<div className="col-md-12" id="google-map" style={{height: "50%"}}>
-						<GoogleMap lat={this.state.imageLatitude} lng={this.state.imageLongitude} image={this.state.imagePreviewURL}/>
+						<GoogleMap lat={this.state.imageLatitude} lng={this.state.imageLongitude} image={this.state.imagePreviewURL}
+						history={this.state.imageHistory}/>
 					</div>
 					<div className="col-md-12">
 						{/*This will be the code we pass to the form Component*/}						
