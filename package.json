@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A full-stack MERN application which uses geolocation to get a users location, and the user can upload pics of their wildlife spottings for others to see.",
   "main": "public/index.html",
+  "engines": {
+    "node": "6.11.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack & node server",
