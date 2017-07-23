@@ -57,13 +57,7 @@ export default class Main extends Component {
 		}
 	}
 	componentDidMount() {
-		helpers.getHistory().then(function(response) {
-			console.log(response);
-			if(response.data !== this.state.imageHistory) {
-				console.log("History", response.data);
-				this.setState({ imageHistory: response.data });
-			}	
-		}.bind(this));
+		console.log("main component mounted")
 	}	
 	render() {
 		return(
