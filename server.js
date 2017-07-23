@@ -22,7 +22,7 @@ app.use(express.static("./public"));
 
 // MongoDB Configuration configuration (Change this URL to your own DB)
 //mongoose.connect("mongodb://admin:codingrocks@ds023664.mlab.com:23664/reactlocate");
-mongoose.connect("mongodb://localhost/spotimal");
+mongoose.connect("mongodb://heroku_14xkmzc1:g4io71tspemot6gfjso3fgj480@ds119223.mlab.com:19223/heroku_14xkmzc1");
 var db = mongoose.connection;
 db.on("error", function(err) {
   console.log("Mongoose Error: ", err);

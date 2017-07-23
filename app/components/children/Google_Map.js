@@ -87,7 +87,6 @@ export default class GoogleMap extends Component {
         });
 	              				
         for (let i = 0; i < this.state.imageHistory.length; i++) {
-       	console.log(this.state.imageHistory);
 		this.marker = new google.maps.Marker({
           // The below line is equivalent to writing:
           // position: new google.maps.LatLng(-34.397, 150.644)
