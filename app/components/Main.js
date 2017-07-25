@@ -61,21 +61,39 @@ export default class Main extends Component {
 	}	
 	render() {
 		return(
-			<div className="container" style={{height: "100%"}}>
-				<div className="row" style={{height: "100%"}}>
-					<div className="jumbotron">
-						<h2 className="text-center">Spotimal</h2>
-						<p className="text-center">You Spot Wildlife. You Share Geotagged Images. Others Spot the Wildlife.</p> 
+			<div className="" style={{height: "100%"}}>
+				<div className="" style={{height: "100%"}}>
+					<div className="bear col-xs-12 col-md-8 col-lg-6">
+						<h2 className="heading text-center">Spotimal</h2>
+						<div className="header-text">
+							<p className="header-text text-center"><span>You Spot Wildlife.</span></p>
+							<br/>
+							<p className="header-text text-center"><span>You Share Geotagged Images.</span> </p>
+							<br/>
+							<p className="header-text text-center">Others Can Spot the Wildlife.</p>						
+						</div>
+						<div className="bottom-header">
+							<ul className="navigation text-center">
+								<a href="#form"><li className="glyphicon glyphicon-plus-sign">Add a spotting</li></a>
+								<a href="#map"><li className="glyphicon glyphicon-map-marker">View recent spottings</li></a>
+							</ul>
+
+						</div>
+						 
 					</div>
-					<div className="col-md-12" id="google-map" style={{height: "50%"}}>
-						<GoogleMap lat={this.state.imageLatitude} lng={this.state.imageLongitude} image={this.state.imagePreviewURL}
-						history={this.state.imageHistory}/>
+					<div>
+
 					</div>
-					<div className="col-md-12">
+		
+					<div id="form" style={{height: "100%"}}>
 						{/*This will be the code we pass to the form Component*/}						
 						<Form setImage={this.setImage} setLatitude={this.setLatitude} setLongitude={this.setLongitude}
 						setDate={this.setDate}/>
 					</div>
+					<div style={{height: "100%"}}>
+						<GoogleMap lat={this.state.imageLatitude} lng={this.state.imageLongitude} image={this.state.imagePreviewURL}
+						history={this.state.imageHistory}/>
+					</div>					
 				</div>
 			</div>
 		);

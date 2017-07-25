@@ -2,10 +2,40 @@ html, body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+	background-color: lightblue;
+	background-size: cover;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.bear {
+	background: url(../images/polar-bear.jpg);
+	background-size: cover;	
+	height: 600px;
+	width: 100%;
+	margin: 0 auto;
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+.google-map {
+	height: 600px;
+	width: 100%;	
 }
 
 #map {
-	height: 90%;
+	height: 100%;
+	width: 100%;
+    border: 1px solid white;
+    border-radius: 3px;	
+}
+
+#form {
+	height: 100%;
+	width: 100%;
+	clear: both;
+	background-color: lightblue;
+    border: 1px solid white;
+    border-radius: 3px;	
 }
 
 img {
@@ -15,4 +45,68 @@ img {
 
 input[type=file]{ 
     color:transparent;
+}
+
+col-xs-12, col-md-8, col-lg-6 {
+	display: inline-block;
+}
+
+.header-text {
+	float: left;
+	display: block;
+	/*border: solid;*/
+	margin-bottom: 20px;
+	margin-top: 30px;
+	font-size: 30px;
+	font-weight: 900;
+	color: #ff7746;
+	/*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+	font-family: 'Open Sans', sans-serif;
+}
+
+.heading {
+	/*border: solid;*/
+	font-size: 80px;
+	color: white;
+	text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+	font-family: 'Modak', cursive;
+}
+
+.bottom-header {
+	clear: both;
+	margin-top: 0px;
+	/*border: solid;*/
+	height: 10%;
+}
+
+li {
+	text-align: center;
+	display: inline;
+	font-size: 20px;
+	height: 10%;
+	/*border: solid;*/
+	margin: 0 10%;	
+	word-spacing: -10px;
+	color: #5F9EA0;
+	font-weight: bold;
+}
+
+
+a li {
+		color: #696969;
+	font-weight: 900;
+}
+
+ul {
+	text-align: center;
+	margin: 0 auto;
+	padding-top: 5%;
+	color: red;
+	font-family: 'Open Sans', sans-serif;
+	/*border: solid;*/
+	height: 10%;
+}
+
+.panel { 
+	background-color: lightblue;
 }

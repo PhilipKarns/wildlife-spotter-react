@@ -92,14 +92,12 @@ export default class Form extends Component {
     }
     return (
       <div className="panel panel-default">
-        <div className="panel-heading">
-          <h3 className="panel-title text-center">Image Upload</h3>
-        </div>
+        
         <div className="panel-body text-center">
         	<form onSubmit={this.handleSubmit} method="post" encType="multipart/form-data">
             <div className="form-group">
               <h4 className="">
-                <strong>Image</strong>
+                <strong>Image Upload</strong>
               </h4>
 
               {/*
@@ -125,8 +123,11 @@ export default class Form extends Component {
                 Submit
               </button>
             </div>
+            {$imagePreview}
           </form>
-          {$imagePreview}
+          <div>
+          
+          </div>
         </div>
       </div>
     );
