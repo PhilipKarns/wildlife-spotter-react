@@ -90,6 +90,7 @@ export default class Form extends Component {
     else {
       $imagePreview = (<div className="previewText">Please select an image for preview</div>);
     }
+    console.log($imagePreview)
     return (
       <div className="panel panel-default">
         
@@ -123,10 +124,9 @@ export default class Form extends Component {
                 Submit
               </button>
             </div>
-            {$imagePreview}
           </form>
           <div>
-          
+            {$imagePreview}
           </div>
         </div>
       </div>
