@@ -11,8 +11,8 @@ export default class GoogleMap extends Component {
 			currentLocation: {
 			lat: 0,
 			lng: 0,
-			imageHistory: [],
-			imageURL: ""
+			imageHistory: []
+			// imageURL: ""
 			}
 		}
 	}	
@@ -22,20 +22,20 @@ export default class GoogleMap extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {		
-		this.setState({ imageURL: nextProps.image });
-		var imagePreviewURL = this.state.imageURL;
-    	var $imagePreview = null;
-	    if(imagePreviewURL) {
-	      $imagePreview = <img src={imagePreviewURL} height="50px" width="50px"></img>;
+		// this.setState({ imageURL: nextProps.image });
+		// var imagePreviewURL = this.state.imageURL;
+  //   	var $imagePreview = null;
+	 //    if(imagePreviewURL) {
+	 //      $imagePreview = <img src={imagePreviewURL} height="50px" width="50px"></img>;
 
-	    }
-	    else {
-	      $imagePreview = (<div className="previewText">No image available</div>);
-	    }
-	    console.log($imagePreview.props);
-	    var imageLink = <img src={$imagePreview.props.src} height={$imagePreview.props.height} width={$imagePreview.props.width}/>
-	    //pan to this location when image coords received from main 
-	    console.log(imageLink);   	
+	 //    }
+	 //    else {
+	 //      $imagePreview = (<div className="previewText">No image available</div>);
+	 //    }
+	 //    console.log($imagePreview.props);
+	 //    var imageLink = <img src={$imagePreview.props.src} height={$imagePreview.props.height} width={$imagePreview.props.width}/>
+
+	    //pan to this location when image coords received from main   	
 		this.map.panTo({ lat: nextProps.lat, lng: nextProps.lng });
 
 		// this.map = new google.maps.Map(this.refs.map, {
@@ -53,11 +53,11 @@ export default class GoogleMap extends Component {
         //if I don't set this.marker to a single-word variable, it causes issues when using methods of the google api like .getPosition()
         const marker = this.marker;
 
-        var infowindow = new google.maps.InfoWindow({
+        this.infowindow = new google.maps.InfoWindow({
         	content: "<p>Marker Location:" + marker.getPosition() + "</p>" +  "<img src='https://goo.gl/4D3CZi' height='50px' width='50px'/>"
         });
         //if I don't set this.infowindow to a single-word variable, it causes issues when using methods of the google api like .open()
-        //const infowindow = this.infowindow;
+        const infowindow = this.infowindow;
         google.maps.event.addListener(this.marker, "click", function() {
         	infowindow.open(map, marker);
         });		
